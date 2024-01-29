@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random String Generator</title>
+
+    <style th:inline="none">
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            max-width: 800px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin: 0;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            flex-grow: 1;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        label {
+            display: inline;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        input {
+            margin: 5px 0;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 10px 0;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+<h2 style="display: inline">Random String Generator</h2>
+<div class="container">
+    <form th:action="@{/generate-strings}" th:method="post" th:object="${generatedStrings}">
+        <label for="numStrings">Number of Strings:</label>
+        <input type="number" name="numStrings" required min="1"><br>
+
+        <label for="numCharacters">Number of Characters in each String:</label>
+        <input type="number" name="numCharacters" required min="1"><br>
+
+        <label for="includeDigits" style="display: inline-block; font-weight: bold">Which characters are allowed to
+            occur in the strings?</label>
+        <div>
+            <input type="checkbox" id="includeDigits" name="includeDigits" style="vertical-align: middle;">
+            <label for="includeDigits">Numeric digits (0-9)</label>
+        </div>
+        <div>
+            <input type="checkbox" id="includeUppercase" name="includeUppercase" style="vertical-align: middle;">
+            <label for="includeUppercase">Uppercase letters (A-Z)</label>
+        </div>
+        <div>
+            <input type="checkbox" id="includeLowercase" name="includeLowercase" style="vertical-align: middle;">
+            <label for="includeLowercase">Lowercase letters (a-z)</label>
+        </div>
+
+        <label for="uniqueStrings" style="display: inline-block; font-weight: bold">Do you want each string to be
+            unique?</label>
+        <div>
+            <input type="radio" id="uniqueYes" name="uniqueStrings" value="true" checked>
+            <label for="uniqueYes">Each string should be unique</label>
+        </div>
+        <div>
+            <input type="radio" id="uniqueNo" name="uniqueStrings" value="false">
+            <label for="uniqueNo">Identical strings are allowed</label>
+        </div>
+        <br>
+        <button type="submit">Generate Strings</button>
+        <button type="reset" style="margin-left: 10px; background-color: #3498db;; color: #fff;">Reset</button>
+    </form>
+</div>
+</body>
+</html>
